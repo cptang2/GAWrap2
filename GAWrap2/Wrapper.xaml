@@ -1,0 +1,103 @@
+﻿<Window x:Class="GAWrap2.Wrapper"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Wrapper" Height="318" Width="316" SnapsToDevicePixels="True" ResizeMode="CanMinimize" Background="#FFE7F7E8">
+    <Grid>
+        <TabControl x:Name="MainGrid" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" BorderThickness="0" Background="#FFC4E6C7">
+            <TabItem x:Name="TCs" Header="Test Cases" Background="#FFE7F7E8" Foreground="Black">
+                <Grid Background="#FFC4E6C7">
+                    <Rectangle Fill="#FFF4F4F5" Height="250" Stroke="Black" VerticalAlignment="Top" StrokeDashArray="0" StrokeThickness="0" HorizontalAlignment="Left" Width="302"/>
+                    <ListBox Name="TestCases" Height="142" Margin="10,69,0,0" VerticalAlignment="Top" Width="273" HorizontalAlignment="Left" SelectionChanged="TestCases_SelectionChanged" MouseUp="TestCases_MouseUp" />
+                    <Button Name="btnAddTC" Content="+" HorizontalAlignment="Left" Margin="37,216,0,0" VerticalAlignment="Top" Width="22" Click="btnAddTC_Click" />
+                    <Button Name="btnRemoveTC" Content="-" HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" Width="22" />
+                    <Button Name="btnOpenTC" Content="Open" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="60" Height="54" Click="btnOpenTC_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FFF2FFFC"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="RoyalBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Name="btnRecordTC" Content="Record" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="60" Height="54" Click="BtnRecordTC_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FFF2FFFC"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="RoyalBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Name="btnEditTC" Content="Edit" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="60" Height="54" Click="btnEditTC_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FFF2FFFC"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="RoyalBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="Playback" HorizontalAlignment="Left" Margin="223,10,0,0" VerticalAlignment="Top" Width="60" Height="54">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FFF2FFFC"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="RoyalBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBox Name="TestName" Height="21.816" Margin="93,0,72.438,20.907" VerticalAlignment="Bottom" Visibility="Hidden" TextChanged="TestName_TextChanged" />
+                    <Button Name="btnSaveTC" Height="23" HorizontalAlignment="Right" Margin="0,0,30.906,19.723" VerticalAlignment="Bottom" Width="36.368" Click="btnSaveTC_Click" Visibility="Hidden">Save</Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
