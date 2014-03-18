@@ -6,44 +6,34 @@ using System.IO;
 using System.Drawing;
 using System.Threading;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class Playback
     {
-        public static mData data;
+        public static MetaData data;
         const int threads = 4;
 
-        static void Init(string[] args)
+        public static void Init(string[] directories, PlaybackTrayApp PTA)
         {
-            List<string> files = new List<string>();
-
-            files = getInput();
-
-            foreach (string f in files)
+            foreach (string d in directories)
             {
-                data = new mData(f, threads);
+                data = new MetaData(d, threads);
                 Startup.run();
             }
 
-            Console.ReadKey();
+            Action close = () => PTA.Close();
+            PTA.Invoke(close);
         }
 
-        //Get user input for file to replay
-        private static List<string> getInput()
+        /// <summary>
+        /// Make sure no key is held down by the system.
+        /// </summary>
+        public static void clear()
         {
-            string file = null;
-            List<string> files = new List<string>();
+            //Up key everything:
+            for (int i = 1; i < 150; i++)
+                KeyboardInput.KeyUp(i);
 
-            while (!File.Exists(file))
-            {
-                Console.Write("File to replay: ");
-                file = Console.ReadLine();
-            }
-
-            files.Add(file);
-
-            return files;
         }
-
     }
 }

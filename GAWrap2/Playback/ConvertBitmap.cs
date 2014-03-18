@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     //Code modified from http://www.codeproject.com/Tips/240428/Work-with-bitmap-faster-with-Csharp
     class ConvertBitmap

@@ -7,7 +7,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class Differ
     {
@@ -24,7 +24,6 @@ namespace PlayBack
             image2 = tempImage2;
             ignRegions = subregion;
         }
-
 
         //Bitwise compare:
         public void compare()
@@ -43,12 +42,10 @@ namespace PlayBack
         }
     }
 
-
     class CompareImages
     {
         static List<int[]> subRegions = new List<int[]>();
-        readonly static int threads = Playback.data.getThreads();
-
+        readonly static int threads = Playback.data.threads;
 
         //Compares the two images given. Splits the computation among the specified number of threads:
         public static bool driver(Bitmap bImage1, Bitmap bImage2)
@@ -78,14 +75,13 @@ namespace PlayBack
 
             //Calculate % difference:
             Console.WriteLine("{0}% different", (total / ((float)bounds.Height * bounds.Width * 4)) * 100);
-            Playback.data.rF.WriteLine("{0}% different", (total / ((float)bounds.Height * bounds.Width * 4)) * 100);
+            Playback.data.resultSW.WriteLine("{0}% different", (total / ((float)bounds.Height * bounds.Width * 4)) * 100);
 
             if (((total / ((float)bounds.Height * bounds.Width * 4)) * 100) < Playback.data.cfg.tol)
                 return true;
             else
                 return false;
         }
-
 
         //Assign work to different threads:
         private static void allocThreads(Byte[] image1, Byte[] image2, Thread[] compThreads, Differ[] diff)
@@ -123,7 +119,6 @@ namespace PlayBack
             }
         }
 
-
         //Wait for the threads to finish:
         private static void waitForFinish(Thread[] compThreads)
         {
@@ -144,7 +139,6 @@ namespace PlayBack
                     break;
             }
         }
-
 
         //Ignore regions specified in config file:
         private static void getIgnBlocks()

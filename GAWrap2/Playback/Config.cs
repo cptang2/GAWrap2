@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class Config
     {

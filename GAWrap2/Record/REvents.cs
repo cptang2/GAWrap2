@@ -83,11 +83,17 @@ namespace GAWrap2
 
         void KeyUp(object sender, KeyEventArgs e)
         {
+            if ((int)e.KeyCode == 44 || (int)e.KeyCode == 122)
+                return;
+
             sW.WriteLine("keyup,{0}", (int)e.KeyCode);
         }
 
         void KeyDown(object sender, KeyEventArgs e)
         {
+            if ((int)e.KeyCode == 44 || (int)e.KeyCode == 122)
+                return;
+
             sW.WriteLine("keydown,{0}", (int)e.KeyCode);
         }
 

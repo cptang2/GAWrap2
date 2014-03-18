@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 
 
-namespace GAWrap2.Editor
+namespace GAWrap2.Steps
 {
     class SControl : sInterface
     {

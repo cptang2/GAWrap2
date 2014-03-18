@@ -106,14 +106,21 @@ namespace GAWrap2
             driver.selectedIndex = TestCases.SelectedIndex;
             
             //Store checked indices
-            List<int> checks = new List<int>();
-            for (int i = 0; i < TestCases.Items.Count; i++)
-                if (((CheckBox)TestCases.Items[i]).IsChecked.Value)
-                    checks.Add(i);
-            driver.checkedIndices = checks;
+            UpdateChecked();
             
             //Display test cases stored in memory
             dispTCs();
+        }
+
+        private void UpdateChecked()
+        {
+            List<int> checks = new List<int>();
+
+            for (int i = 0; i < TestCases.Items.Count; i++)
+                if (((CheckBox)TestCases.Items[i]).IsChecked.Value)
+                    checks.Add(i);
+
+            driver.checkedIndices = checks;
         }
 
         private void btnSaveTC_Click(object sender, RoutedEventArgs e)
@@ -133,6 +140,13 @@ namespace GAWrap2
         {
             if (!driver.showEditor(this))
                 MessageBox.Show("Choose a test case to edit");
+        }
+
+        private void BtnPlayback_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateChecked();
+            if (!driver.playback(this))
+                MessageBox.Show("Choose test cases to replay");
         }
     }
 }

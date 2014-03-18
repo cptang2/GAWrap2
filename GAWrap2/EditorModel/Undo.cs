@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace GAWrap2.Editor
+namespace GAWrap2.Steps
 {
     abstract class Undo
     {

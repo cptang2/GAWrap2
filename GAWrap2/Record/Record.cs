@@ -11,7 +11,7 @@ using MouseKeyboardActivityMonitor;
 using MouseKeyboardActivityMonitor.Controls;
 
 
-namespace GAWrap2
+namespace GAWrap2.Record
 {
     class Record
     {

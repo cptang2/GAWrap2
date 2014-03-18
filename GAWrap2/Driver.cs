@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using GAWrap2.Editor;
+using GAWrap2.Record;
+using GAWrap2.Playback;
 
 namespace GAWrap2
 {
@@ -147,5 +149,34 @@ namespace GAWrap2
 
         #endregion
 
+        #region Playback
+
+        public bool playback(Object sender)
+        {
+            if (checkedIndices.Count == 0)
+                return false;
+
+            ((Wrapper)sender).Visibility = System.Windows.Visibility.Hidden;
+            PlaybackTrayApp.initPlaybackApp(GetCheckedTCs());
+            ((Wrapper)sender).Visibility = System.Windows.Visibility.Visible;
+
+            return true;
+        }
+
+        private string[] GetCheckedTCs()
+        {
+            string[] TCs = new string[checkedIndices.Count];
+            int index = 0;
+
+            foreach (int i in checkedIndices)
+            {
+                TCs[index] = testcases[i];
+                index++;
+            }
+
+            return TCs;
+        }
+
+        #endregion
     }
 }

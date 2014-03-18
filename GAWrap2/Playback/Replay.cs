@@ -7,16 +7,18 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
+    
     //Each step consists of an image and the corresponding events
-    struct step
+    //This does not load all of the steps into memory like in editor
+    struct StepLite
     {
         public string image;
         public List<string> events;
 
 
-        public step(string image)
+        public StepLite(string image)
         {
             this.image = image;
             events = new List<string>();
@@ -28,27 +30,29 @@ namespace PlayBack
             this.image = image;
         }
     }
+    
 
-
-    class Replay : ParseTCs
+    class Replay
     {
-        private List<step> sList;
+        ParseTCs TCParser = new ParseTCs();
+
+        private List<StepLite> sList;
         private Rectangle bounds = Screen.GetBounds(Point.Empty);
 
 
         public Replay() 
         {
-            sList = readTCs(Playback.data.file);
-            printEvents();
+            sList = TCParser.readTCs(Playback.data.file, -1);
+            //printEvents();
         }
 
 
         //Replay events in csv file:
         public bool playSteps()
         {
-            foreach (step e in sList)
+            foreach (StepLite e in sList)
             {
-                Playback.data.rF.WriteLine("Step: {0}", e.image);
+                Playback.data.resultSW.WriteLine("Step: {0}", e.image);
 
                 foreach (string s in e.events)
                 {
@@ -126,9 +130,10 @@ namespace PlayBack
                         index++;
                     }
 
-                    Playback.data.rF.WriteLine();
+                    Playback.data.resultSW.WriteLine();
 
-                    checkSave(screen, image, index);
+                    if (!checkSave((Bitmap)screen.Clone(), image, index))
+                        return false;
                 }
             }
 
@@ -140,11 +145,11 @@ namespace PlayBack
         private bool checkSave(Bitmap screen, string image, int index)
         {
             if (Playback.data.cfg.record)
-                screen.Save(Path.Combine(Playback.data.dir, ("_Results\\" + image)));
+                screen.Save(Path.Combine(Playback.data.dir, ("Results\\" + image)));
 
             if (index == (int)(Playback.data.cfg.timeout / 1000))
             {
-                screen.Save(Path.Combine(Playback.data.dir, ("_Results\\" + image)));
+                screen.Save(Path.Combine(Playback.data.dir, ("Results\\" + image)));
 
                 //Up key everything:
                 for (int i = 1; i < 150; i++)
@@ -160,18 +165,18 @@ namespace PlayBack
         //Print what is stored in the eventList data structure
         private void printEvents()
         {
-            foreach (step e in sList)
+            foreach (StepLite e in sList)
             {
                 Console.WriteLine("Image: {0}", e.image);
-                Playback.data.rF.WriteLine("Image: {0}", e.image);
+                Playback.data.resultSW.WriteLine("Image: {0}", e.image);
 
                 foreach (string s in e.events)
                 {
                     Console.WriteLine("event: {0}", s);
-                    Playback.data.rF.WriteLine("Image: {0}", s);
+                    Playback.data.resultSW.WriteLine("Image: {0}", s);
                 }
 
-                Playback.data.rF.WriteLine();
+                Playback.data.resultSW.WriteLine();
                 Console.Write('\n');
             }
         }

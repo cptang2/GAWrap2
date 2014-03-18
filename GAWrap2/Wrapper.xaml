@@ -2,8 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Wrapper" Height="318" Width="316" SnapsToDevicePixels="True" ResizeMode="CanMinimize" Background="#FFE7F7E8">
-    <Grid>
-        <TabControl x:Name="MainGrid" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" BorderThickness="0" Background="#FFC4E6C7">
+    <Grid Background="White">
+        <TabControl x:Name="MainGrid" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" BorderThickness="0" Background="White">
             <TabItem x:Name="TCs" Header="Test Cases" Background="#FFE7F7E8" Foreground="Black">
                 <Grid Background="#FFC4E6C7">
                     <Rectangle Fill="#FFF4F4F5" Height="250" Stroke="Black" VerticalAlignment="Top" StrokeDashArray="0" StrokeThickness="0" HorizontalAlignment="Left" Width="302"/>
@@ -73,7 +73,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Content="Playback" HorizontalAlignment="Left" Margin="223,10,0,0" VerticalAlignment="Top" Width="60" Height="54">
+                    <Button Name="BtnPlayback" Content="Playback" HorizontalAlignment="Left" Margin="223,10,0,0" VerticalAlignment="Top" Width="60" Height="54" Click="BtnPlayback_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#FFF2FFFC"/>

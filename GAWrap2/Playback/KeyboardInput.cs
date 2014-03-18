@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class KeyboardInput
     {

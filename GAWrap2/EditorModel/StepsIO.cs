@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace GAWrap2.Editor
+namespace GAWrap2.Steps
 {
     class StepsIO : Undo
     {

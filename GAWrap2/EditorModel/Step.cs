@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace GAWrap2.Editor
+namespace GAWrap2.Steps
 {
     class Step
     {

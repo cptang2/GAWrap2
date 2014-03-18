@@ -4,23 +4,30 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
-    abstract class ParseTCs
+    class ParseTCs
     {
         // Put csv instructions file into data object
-        public List<step> readTCs(string file)
+        public List<StepLite> readTCs(string file, int length)
         {
-            List<step> sList = new List<step>();
+            List<StepLite> sList = new List<StepLite>();
 
             //Read events from file and stores them in a list of eventStore objects:
             using (StreamReader instructs = new StreamReader(file))
             {
                 string line;
+                int index = 0;
                 while ((line = instructs.ReadLine()) != null)
                 {
                     if (line.Split(',')[0] == "image")
-                        sList.Add(new step(line.Split(',')[1]));
+                    {
+                        if (index != -1)
+                            if (++index > length)
+                                break;
+
+                        sList.Add(new StepLite(line.Split(',')[1]));
+                    }
                     else if (sList.Count > 0)
                         sList[sList.Count - 1].events.Add(line);
                 }
@@ -34,20 +41,25 @@ namespace PlayBack
 
 
         //Remove ignored steps:
-        private void delIgnored(List<step> sList)
+        private void delIgnored(List<StepLite> sList)
         {
             for (int i = Playback.data.cfg.steps.Count - 1; i >= 0; i--)
                 sList.RemoveAt(Playback.data.cfg.steps[i]);
+
+            //Remove time stamps:
+            for (int i = 0; i < sList.Count; i++)
+                if (sList[i].events[0].Split(',').Length == 1)
+                    sList[i].events.RemoveAt(0);
         }
 
 
         //Double click is also recorded as two click down and click up events.
         //Need to remove the unnecessary events
-        private void cleanDoubleClick(List<step> sList)
+        private void cleanDoubleClick(List<StepLite> sList)
         {
             List<string> sE;
 
-            Func<List<step>, int, int> remStep = (s, i) =>
+            Func<List<StepLite>, int, int> remStep = (s, i) =>
             {
                 s[i].setImage(s[i - 1].image);
                 s.RemoveAt(i - 1);

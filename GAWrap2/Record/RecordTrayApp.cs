@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
 
-namespace GAWrap2
+namespace GAWrap2.Record
 {
     class RecordTrayApp : Form
     {

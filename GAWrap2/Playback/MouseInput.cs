@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading; 
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class MouseInput
     {

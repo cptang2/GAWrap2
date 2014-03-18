@@ -86,11 +86,14 @@
     </Compile>
     <Compile Include="EditorView\GetFiles.cs" />
     <Compile Include="EditorView\Indices.cs" />
+    <Compile Include="Playback\PlaybackTrayApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Playback\CompareImages.cs" />
     <Compile Include="Playback\Config.cs" />
     <Compile Include="Playback\ConvertBitmap.cs" />
     <Compile Include="Playback\KeyboardInput.cs" />
-    <Compile Include="Playback\mData.cs" />
+    <Compile Include="Playback\MetaData.cs" />
     <Compile Include="Playback\MouseInput.cs" />
     <Compile Include="Playback\ParseTCs.cs" />
     <Compile Include="Playback\Playback.cs" />

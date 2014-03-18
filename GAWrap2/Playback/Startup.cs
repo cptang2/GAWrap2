@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.IO;
+using System.Diagnostics;
 
-namespace PlayBack
+namespace GAWrap2.Playback
 {
     class Startup
     {
@@ -13,15 +14,24 @@ namespace PlayBack
         public static void run()
         {
             //Wait for the time specified in the config file
-            Thread.Sleep((new Config(Path.Combine(Playback.data.dir, @"config.xml"))).start);
+            //Thread.Sleep((new Config(Path.Combine(Playback.data.dir, @"config.xml"))).start);
+
+            if (File.Exists(Path.Combine(Playback.data.dir, "setup.bat")))
+            {
+                ProcessStartInfo setup = new ProcessStartInfo(Path.Combine(Playback.data.dir, "setup.bat"));
+                Process setupProc = Process.Start(setup);
+                setupProc.WaitForExit();
+            }
 
             //Run playback and record the results in a results file:
             Replay rObj = new Replay();
 
             if (rObj.playSteps())
-                Playback.data.rF.WriteLine("Successful run");
+                Playback.data.resultSW.WriteLine("Successful run");
             else
-                Playback.data.rF.WriteLine("Failed run");
+                Playback.data.resultSW.WriteLine("Failed run");
+
+            Playback.data.resultSW.Close();
 
             Console.WriteLine("Finished");
         }
