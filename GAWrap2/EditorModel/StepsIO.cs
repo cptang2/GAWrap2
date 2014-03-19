@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace GAWrap2.Steps
@@ -32,7 +33,10 @@ namespace GAWrap2.Steps
             if (ln.Split(',')[0] == "image")
             {
                 s.Add(new Step());
-                s[s.Count - 1].image = new Bitmap(imDir + "\\" + ln.Split(',')[1]);
+                Bitmap temp = new Bitmap(imDir + "\\" + ln.Split(',')[1]); //Enable deleting images while editor is loaded by using a temp variable
+                s[s.Count - 1].image = new Bitmap(temp);                  
+                (new Thread(new ThreadStart(temp.Dispose))).Start();
+
                 s[s.Count - 1].image.Tag = ln.Split(',')[1];         // Label image with its original name
             }
             else
@@ -40,16 +44,19 @@ namespace GAWrap2.Steps
         }
 
         //Write steps in memory into a file
-        public void writeTo(List<Step> steps, string file)
+        public void writeTo(List<Step> steps, string file, int length)
         {
-            StreamWriter sr = new StreamWriter(file);
-            foreach (Step s in steps)
+            if (length == -1)
+                length = steps.Count;
+
+            StreamWriter sW = new StreamWriter(file);
+            for (int i = 0; i < steps.Count && i < length; i++)
             {
-                sr.WriteLine("image,{0}", s.image.Tag);
-                s.events.ForEach((item) => { sr.WriteLine(item); });
+                sW.WriteLine("image,{0}", steps[i].image.Tag); 
+                steps[i].events.ForEach((item) => { sW.WriteLine(item); });
             }
 
-            sr.Close();
+            sW.Close();
         }
     }
 }

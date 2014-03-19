@@ -151,26 +151,19 @@ namespace GAWrap2
 
         #region Playback
 
-        public bool playback(Object sender)
+        public void playback(string[] testcases)
         {
-            if (checkedIndices.Count == 0)
-                return false;
-
-            ((Wrapper)sender).Visibility = System.Windows.Visibility.Hidden;
-            PlaybackTrayApp.initPlaybackApp(GetCheckedTCs());
-            ((Wrapper)sender).Visibility = System.Windows.Visibility.Visible;
-
-            return true;
+            PlaybackTrayApp.initPlaybackApp(testcases);
         }
 
-        private string[] GetCheckedTCs()
+        public string[] GetCheckedTCs()
         {
             string[] TCs = new string[checkedIndices.Count];
             int index = 0;
 
             foreach (int i in checkedIndices)
             {
-                TCs[index] = testcases[i];
+                TCs[index] = Path.Combine(testcases[i], "testcase.csv");
                 index++;
             }
 

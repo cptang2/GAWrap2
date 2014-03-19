@@ -37,7 +37,6 @@ namespace GAWrap2.Steps
         /// </summary>
         void close();
 
-
         /// <summary>
         /// Handle if a step changes
         /// </summary>
@@ -48,6 +47,13 @@ namespace GAWrap2.Steps
         /// </summary>
         /// <param name="file">Full file path with extension</param>
         void writeTo(string file);
+
+        /// <summary>
+        /// Write steps in memory into a file
+        /// </summary>
+        /// <param name="file">Full file path with extension</param>
+        /// <param name="length">The number of steps to write to the file.</param>
+        void writeTo(string file, int length);
 
         /// <summary>
         /// Modify an event
@@ -72,7 +78,7 @@ namespace GAWrap2.Steps
         /// Insert a Step
         /// </summary>
         /// <param name="sIndex">Steps index</param>
-        /// <param name="s">Steo to instert</param>
+        /// <param name="s">Step to instert</param>
         void insert(int sIndex, Step s);
 
         /// <summary>

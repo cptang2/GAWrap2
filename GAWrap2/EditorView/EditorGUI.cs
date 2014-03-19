@@ -18,7 +18,7 @@ namespace GAWrap2.Editor
         const string redoText = "\u21BB";
         const string moveLText = "\u2190";
         const string moveRText = "\u2192";
-        string directory;
+        readonly string directory;
 
         sInterface steps = new SControl();  //Store steps
 
@@ -51,6 +51,7 @@ namespace GAWrap2.Editor
             redoBut.Text = redoText;
             moveLeft.Text = moveLText;
             moveRight.Text = moveRText;
+            imageTag.Text = "";
 
             // Controls to enable when loading a valid test case
             toEnable = new List<Control>()
@@ -105,7 +106,7 @@ namespace GAWrap2.Editor
         {
             indices.sIndex = 1;
             toEnable.ForEach((item) => { item.Enabled = true; });  // Enable list of controls
-            save.Enabled = true;
+            ToolBtnSave.Enabled = true;
             steps.copy(s);                                         // Deallocates unused space and assigns s to steps
         }
 
@@ -134,6 +135,9 @@ namespace GAWrap2.Editor
 
             denom.Text = steps.count.ToString();
             num.Text = indices.sIndex.ToString();
+
+            if (steps[indices.sIndex].image.Tag != null)
+                imageTag.Text = steps[indices.sIndex].image.Tag.ToString();
 
             ScaleBmp.setImg(StepPic, steps[indices.sIndex].image);      // Set current bitmap
             dispStep(steps[indices.sIndex].events.ToList());            // Set events (in a step)
@@ -224,13 +228,49 @@ namespace GAWrap2.Editor
             refresh();
         }
 
-        private void save_Click(object sender, EventArgs e)
+        //Overwrite existing test case file with what is in memory
+        private void ToolBtnSave_Click(object sender, EventArgs e)
         {
-            string f;
-            if ((f = GetFiles.saveTC()) == null)
-                return;
+            System.Windows.MessageBoxResult result = 
+                System.Windows.MessageBox.Show("Do you want to overwrite the existing testcase?", "Confirmation", 
+                                                System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question);
 
-            steps.writeTo(f);
+            if (result == System.Windows.MessageBoxResult.Yes)
+            {
+                steps.writeTo(Path.Combine(directory, "testcase.csv"));
+                OpenTC();
+            }
+        }
+
+        private void ToolBtnReplay_Click(object sender, EventArgs e)
+        {
+            string tc_trunc = Path.Combine(this.directory, "testcase_trunc.csv");
+
+            steps.writeTo(tc_trunc, stepIndex-1);
+            RecordPlayback.replay(this, tc_trunc);
+
+            //Delete temp file. It's ok if there's an exception deleting it.
+            try
+            {
+                File.Delete(tc_trunc);
+            }
+            catch { }
+        }
+
+        private void ToolBtnInsert_Click(object sender, EventArgs e)
+        {
+            string recordTemp = Path.Combine(this.directory, "Record_temp");
+            if (!Directory.Exists(recordTemp))
+                Directory.CreateDirectory(recordTemp);
+
+            RecordPlayback.record(this, directory, recordTemp, stepIndex);
+            OpenTC();
+        }
+
+        private void ToolBtnSerialize_Click(object sender, EventArgs e)
+        {
+            RecordPlayback.serialize(directory);
+            OpenTC();
         }
     }
 }

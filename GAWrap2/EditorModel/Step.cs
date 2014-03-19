@@ -18,6 +18,7 @@ namespace GAWrap2.Steps
         public Step(Step s)
         {
             this.image = (Bitmap)s.image.Clone();
+            this.image.Tag = ((Bitmap)s.image).Tag.ToString();
             s.events.ForEach((item) => { events.Add(item); });
         }
 

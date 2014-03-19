@@ -114,7 +114,6 @@ namespace GAWrap2
         }
         #endregion
 
-
         public static string GetDirectory()
         {
             using (GetDirectoryDialog dialog = new GetDirectoryDialog())

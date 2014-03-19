@@ -14,10 +14,10 @@ namespace GAWrap2.Playback
         public readonly StreamWriter resultSW;
         public readonly int threads;
 
-        public MetaData(string directory, int threads)
+        public MetaData(string file, int threads)
         {
-            this.dir = directory;
-            this.file = Path.Combine(dir, "testcase.csv");
+            this.file = file;
+            this.dir = Path.GetDirectoryName(file);
             cfg = new Config(Path.Combine(dir, @"config.xml"));
             resultSW = new StreamWriter(CreateResultFolder(dir + "\\Results"));
             this.threads = threads;

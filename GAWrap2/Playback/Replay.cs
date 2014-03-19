@@ -36,13 +36,13 @@ namespace GAWrap2.Playback
     {
         ParseTCs TCParser = new ParseTCs();
 
-        private List<StepLite> sList;
+        private List<StepLite> stepList;
         private Rectangle bounds = Screen.GetBounds(Point.Empty);
 
 
         public Replay() 
         {
-            sList = TCParser.readTCs(Playback.data.file, -1);
+            stepList = TCParser.readTCs(Playback.data.file, -1);
             //printEvents();
         }
 
@@ -50,7 +50,7 @@ namespace GAWrap2.Playback
         //Replay events in csv file:
         public bool playSteps()
         {
-            foreach (StepLite e in sList)
+            foreach (StepLite e in stepList)
             {
                 Playback.data.resultSW.WriteLine("Step: {0}", e.image);
 
@@ -165,7 +165,7 @@ namespace GAWrap2.Playback
         //Print what is stored in the eventList data structure
         private void printEvents()
         {
-            foreach (StepLite e in sList)
+            foreach (StepLite e in stepList)
             {
                 Console.WriteLine("Image: {0}", e.image);
                 Playback.data.resultSW.WriteLine("Image: {0}", e.image);

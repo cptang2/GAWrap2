@@ -14,7 +14,7 @@ namespace GAWrap2.Playback
         public static void run()
         {
             //Wait for the time specified in the config file
-            //Thread.Sleep((new Config(Path.Combine(Playback.data.dir, @"config.xml"))).start);
+            Thread.Sleep((new Config(Path.Combine(Playback.data.dir, @"config.xml"))).start);
 
             if (File.Exists(Path.Combine(Playback.data.dir, "setup.bat")))
             {

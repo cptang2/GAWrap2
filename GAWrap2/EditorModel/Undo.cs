@@ -36,7 +36,7 @@ namespace GAWrap2.Steps
         public Undo() { }
 
         // Called to clean up
-        public void dispose()
+        public void clear()
         {
             uInput uI;
 
@@ -45,7 +45,6 @@ namespace GAWrap2.Steps
                 if ((uI = inputs.Pop()).step.image != null)
                     uI.step.image.Dispose();
             }
-            inputs = null;
         }
 
         //Remove top element

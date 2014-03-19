@@ -48,7 +48,7 @@ namespace GAWrap2
         {
             Forms.OpenFileDialog oFD = new Forms.OpenFileDialog();
             oFD.RestoreDirectory = true;
-            oFD.Filter = "Test Cases File |*.GUIAutomation";
+            oFD.Filter = "Test Cases File *.GUIAutomation |*.GUIAutomation";
 
             oFD.ShowDialog();
 
@@ -145,8 +145,14 @@ namespace GAWrap2
         private void BtnPlayback_Click(object sender, RoutedEventArgs e)
         {
             UpdateChecked();
-            if (!driver.playback(this))
+            if (driver.checkedIndices.Count == 0)
                 MessageBox.Show("Choose test cases to replay");
+            else
+            {
+                this.Visibility = System.Windows.Visibility.Hidden;
+                driver.playback(driver.GetCheckedTCs());
+                this.Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }

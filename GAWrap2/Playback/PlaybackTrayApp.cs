@@ -15,22 +15,22 @@ namespace GAWrap2.Playback
     class PlaybackTrayApp : Form
     {
         NotifyIcon trayIcon;
-        readonly string[] directories;
+        readonly string[] files;
         Thread replayThread;                // Replay thread
         MouseKeyEventProvider spKeys;       // Listen for special keys to  stop playback
 
-        public PlaybackTrayApp(string[] directories)
+        public PlaybackTrayApp(string[] files)
         {
-            this.directories = directories;
+            this.files = files;
 
             spKeys = new MouseKeyEventProvider();
             spKeys.KeyDown += Key;
         }
 
         [STAThread]
-        public static void initPlaybackApp(string[] directories)
+        public static void initPlaybackApp(string[] files)
         {
-            PlaybackTrayApp app = new PlaybackTrayApp(directories);
+            PlaybackTrayApp app = new PlaybackTrayApp(files);
             Application.Run(app);
         }
 
@@ -60,7 +60,7 @@ namespace GAWrap2.Playback
 
         Thread AllocPlayback()
         {
-            Action playObj = () => Playback.Init(directories, this);
+            Action playObj = () => Playback.Init(files, this);
 
             return new Thread(new ThreadStart(playObj));
         }

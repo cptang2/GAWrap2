@@ -42,7 +42,10 @@ namespace GAWrap2
         public void unStop()
         {
             if (stopTime != null && stopTime.IsAlive)
+            {
                 stopTime.Abort();
+                while (stopTime.IsAlive) ;
+            }
         }
 
         private string GetTime()

@@ -46,7 +46,11 @@
             this.redoBut = new System.Windows.Forms.Button();
             this.undoBut = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.save = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBtnSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBtnReplay = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBtnInsert = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageTag = new System.Windows.Forms.Label();
+            this.ToolBtnSerialize = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.StepPic)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -221,26 +225,61 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.save});
+            this.ToolBtnSave,
+            this.ToolBtnReplay,
+            this.ToolBtnInsert,
+            this.ToolBtnSerialize});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(457, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // save
+            // ToolBtnSave
             // 
-            this.save.Enabled = false;
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(43, 20);
-            this.save.Text = "Save";
-            this.save.Click += new System.EventHandler(this.save_Click);
+            this.ToolBtnSave.Enabled = false;
+            this.ToolBtnSave.Name = "ToolBtnSave";
+            this.ToolBtnSave.Size = new System.Drawing.Size(43, 20);
+            this.ToolBtnSave.Text = "Save";
+            this.ToolBtnSave.Click += new System.EventHandler(this.ToolBtnSave_Click);
+            // 
+            // ToolBtnReplay
+            // 
+            this.ToolBtnReplay.Name = "ToolBtnReplay";
+            this.ToolBtnReplay.Size = new System.Drawing.Size(52, 20);
+            this.ToolBtnReplay.Text = "Replay";
+            this.ToolBtnReplay.Click += new System.EventHandler(this.ToolBtnReplay_Click);
+            // 
+            // ToolBtnInsert
+            // 
+            this.ToolBtnInsert.Name = "ToolBtnInsert";
+            this.ToolBtnInsert.Size = new System.Drawing.Size(48, 20);
+            this.ToolBtnInsert.Text = "Insert";
+            this.ToolBtnInsert.Click += new System.EventHandler(this.ToolBtnInsert_Click);
+            // 
+            // imageTag
+            // 
+            this.imageTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.imageTag.AutoSize = true;
+            this.imageTag.Location = new System.Drawing.Point(12, 253);
+            this.imageTag.Name = "imageTag";
+            this.imageTag.Size = new System.Drawing.Size(58, 13);
+            this.imageTag.TabIndex = 16;
+            this.imageTag.Text = "Image Tag";
+            // 
+            // ToolBtnSerialize
+            // 
+            this.ToolBtnSerialize.Name = "ToolBtnSerialize";
+            this.ToolBtnSerialize.Size = new System.Drawing.Size(58, 20);
+            this.ToolBtnSerialize.Text = "Serialize";
+            this.ToolBtnSerialize.Click += new System.EventHandler(this.ToolBtnSerialize_Click);
             // 
             // EditorGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 308);
+            this.Controls.Add(this.imageTag);
             this.Controls.Add(this.redoBut);
             this.Controls.Add(this.undoBut);
             this.Controls.Add(this.remove);
@@ -286,7 +325,11 @@
         private System.Windows.Forms.Button redoBut;
         private System.Windows.Forms.Button undoBut;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem save;
+        private System.Windows.Forms.ToolStripMenuItem ToolBtnSave;
+        private System.Windows.Forms.ToolStripMenuItem ToolBtnReplay;
+        private System.Windows.Forms.ToolStripMenuItem ToolBtnInsert;
+        private System.Windows.Forms.Label imageTag;
+        private System.Windows.Forms.ToolStripMenuItem ToolBtnSerialize;
     }
 }
 

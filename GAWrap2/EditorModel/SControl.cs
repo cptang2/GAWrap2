@@ -57,6 +57,8 @@ namespace GAWrap2.Steps
                 (new Thread(new ThreadStart(free))).Start();
 
             this.steps = s.steps;
+
+            reader.clear();
             onChange();
         }
 
@@ -81,7 +83,12 @@ namespace GAWrap2.Steps
 
         public void writeTo(string file)
         {
-            reader.writeTo(steps, file);
+            reader.writeTo(steps, file, -1);
+        }
+
+        public void writeTo(string file, int length)
+        {
+            reader.writeTo(steps, file, length);
         }
 
         public void modEvent(int sIndex, int eIndex, string ev)

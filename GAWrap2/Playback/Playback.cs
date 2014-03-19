@@ -12,15 +12,22 @@ namespace GAWrap2.Playback
     {
         public static MetaData data;
         const int threads = 4;
+        static SetTime time;
 
-        public static void Init(string[] directories, PlaybackTrayApp PTA)
+        public static void Init(string[] files, PlaybackTrayApp PTA)
         {
-            foreach (string d in directories)
+            time = new SetTime();
+            time.stop();
+
+            foreach (string f in files)
             {
-                data = new MetaData(d, threads);
+                data = new MetaData(f, threads);
                 Startup.run();
             }
 
+            time.unStop();
+
+            //Close caller:
             Action close = () => PTA.Close();
             PTA.Invoke(close);
         }
@@ -30,10 +37,11 @@ namespace GAWrap2.Playback
         /// </summary>
         public static void clear()
         {
+            time.unStop();
+
             //Up key everything:
             for (int i = 1; i < 150; i++)
                 KeyboardInput.KeyUp(i);
-
         }
     }
 }

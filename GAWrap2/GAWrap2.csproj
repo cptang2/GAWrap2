@@ -81,6 +81,7 @@
     <Compile Include="EditorView\EditorGUI.Designer.cs">
       <DependentUpon>EditorGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditorView\RecordPlayback.cs" />
     <Compile Include="GetDirectoryDialog.cs">
       <SubType>Form</SubType>
     </Compile>

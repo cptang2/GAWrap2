@@ -22,7 +22,7 @@ namespace GAWrap2.Playback
                 {
                     if (line.Split(',')[0] == "image")
                     {
-                        if (index != -1)
+                        if (length != -1)
                             if (++index > length)
                                 break;
 
@@ -43,7 +43,7 @@ namespace GAWrap2.Playback
         //Remove ignored steps:
         private void delIgnored(List<StepLite> sList)
         {
-            for (int i = Playback.data.cfg.steps.Count - 1; i >= 0; i--)
+            for (int i = Playback.data.cfg.steps.Count - 1; i >= 0 && i < sList.Count; i--)
                 sList.RemoveAt(Playback.data.cfg.steps[i]);
 
             //Remove time stamps:
