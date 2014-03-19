@@ -135,6 +135,12 @@ namespace GAWrap2
             driver.addTC();
             dispTCs();
         }
+        
+        private void btnRemoveTC_Click(object sender, RoutedEventArgs e)
+        {
+            driver.removeTC();
+            dispTCs();
+        }
 
         private void btnEditTC_Click(object sender, RoutedEventArgs e)
         {

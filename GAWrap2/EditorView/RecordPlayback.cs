@@ -79,7 +79,7 @@ namespace GAWrap2.Editor
                 {
                     tempIndex++;
 
-                    if (tempIndex == stepIndex + 1)
+                    if (tempIndex == stepIndex)
                         break;
                 }
             }

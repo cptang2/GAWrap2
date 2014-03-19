@@ -100,11 +100,28 @@ namespace GAWrap2
         public void addTC()
         {
             string dir;
-            
+
             if ((dir = GetDirectoryDialog.GetDirectory()) == null || dir.Length == 0)
                 return;
             
-            testcases.Add(dir);
+            if  (!testcases.Contains(dir))
+                testcases.Add(dir);
+        }
+
+        public void removeTC()
+        {
+            if (selectedIndex == -1)
+                return;
+
+            if (checkedIndices.Contains(_selectedIndex))
+                checkedIndices.Remove(_selectedIndex);
+
+            //Decrement all items greater than the selected index:
+            for (int i = checkedIndices.Count - 1; i >= 0; i--)
+                if (checkedIndices[i] > _selectedIndex)
+                    checkedIndices[i]--;
+
+            testcases.RemoveAt(_selectedIndex);
         }
 
         #region Record
@@ -140,6 +157,9 @@ namespace GAWrap2
             if (selectedIndex == -1)
                 return false;
 
+            if (!File.Exists(Path.Combine(testcases[selectedIndex], "testcase.csv")))
+                return false;
+
             ((Wrapper)sender).Visibility = System.Windows.Visibility.Hidden;
             EditorGUI.initEditor(testcases[selectedIndex]);
             ((Wrapper)sender).Visibility = System.Windows.Visibility.Visible;
@@ -156,18 +176,21 @@ namespace GAWrap2
             PlaybackTrayApp.initPlaybackApp(testcases);
         }
 
+        /// <summary>
+        /// Get checked test case file paths for test cases that exist
+        /// </summary>
+        /// <returns>Checked test case file paths</returns>
         public string[] GetCheckedTCs()
         {
-            string[] TCs = new string[checkedIndices.Count];
-            int index = 0;
+            List<string> TCs = new List<string>();
 
             foreach (int i in checkedIndices)
             {
-                TCs[index] = Path.Combine(testcases[i], "testcase.csv");
-                index++;
+                if (File.Exists(Path.Combine(testcases[i], "testcase.csv")))
+                    TCs.Add(Path.Combine(testcases[i], "testcase.csv"));
             }
 
-            return TCs;
+            return TCs.ToArray();
         }
 
         #endregion

@@ -39,7 +39,13 @@ namespace GAWrap2.Editor
         private void EditorGUI_Load(object sender, EventArgs e)
         {
             setup();
-            OpenTC(); 
+            OpenTC();
+
+            if (steps.count == 0)
+            {
+                MessageBox.Show("Editor cannot load testcase.csv file because it contains invalid information");
+                this.Close();
+            }
         }
 
         public void setup()
@@ -98,7 +104,8 @@ namespace GAWrap2.Editor
         //Event handler for if the form is resized
         private void StepPic_SizeChanged(object sender, EventArgs e)
         {
-            ScaleBmp.setImg(StepPic, steps[indices.sIndex].image);
+            if (steps.count > 0)
+                ScaleBmp.setImg(StepPic, steps[indices.sIndex].image);
         }
 
         //Display test case
@@ -218,7 +225,8 @@ namespace GAWrap2.Editor
         //Remove a step
         private void remove_Click(object sender, EventArgs e)
         {
-            steps.remStep(indices.sIndex);
+            if (steps.count > 1)
+                steps.remStep(indices.sIndex);
         }
 
         // Undo user input

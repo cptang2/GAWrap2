@@ -21,6 +21,9 @@ namespace GAWrap2.Playback
 
             foreach (string f in files)
             {
+                if (data != null && data.resultSW != null)
+                    data.resultSW.Close();
+
                 data = new MetaData(f, threads);
                 Startup.run();
             }
@@ -42,6 +45,9 @@ namespace GAWrap2.Playback
             //Up key everything:
             for (int i = 1; i < 150; i++)
                 KeyboardInput.KeyUp(i);
+
+            if (data.resultSW != null)
+                data.resultSW.Close();
         }
     }
 }

@@ -82,7 +82,7 @@ namespace GAWrap2.Playback
         {
             double[] v = new double[2];
 
-            do
+            while (dot(x - Cursor.Position.X, y - Cursor.Position.Y) > 100)
             {
                 v[0] = (x - Cursor.Position.X);
                 v[1] = (y - Cursor.Position.Y);
@@ -93,7 +93,7 @@ namespace GAWrap2.Playback
                 mouse("move", (int)(Cursor.Position.X + v[0] * 20), (int)(Cursor.Position.Y + v[1] * 20));
 
                 Thread.Sleep(5);
-            } while (dot(x - Cursor.Position.X, y - Cursor.Position.Y) > 100);
+            }
 
             mouse("move", x, y);
         }

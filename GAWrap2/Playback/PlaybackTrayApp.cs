@@ -74,8 +74,8 @@ namespace GAWrap2.Playback
         {
             if (replayThread != null && replayThread.IsAlive)
             {
-                replayThread.Abort();
                 Playback.clear();
+                replayThread.Abort();
             }
 
             this.Close();
